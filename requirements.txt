@@ -3,4 +3,4 @@ pandas>=1.5
 matplotlib>=3.6
 Pillow>=9.0
 scikit-image>=0.19   # лише для перехресної перевірки SSIM (за потреби)
-python-docx>=0.8     # лише для збирання звіту (scripts/build_report.py)
+
