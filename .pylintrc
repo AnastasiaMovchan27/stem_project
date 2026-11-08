@@ -1,0 +1,16 @@
+[MASTER]
+init-hook='import sys; sys.path.append(".")'
+
+[FORMAT]
+max-line-length=120
+
+[BASIC]
+good-names=i,j,k,x,y,r,g,b,c,a,p,s,v,dx,dy,tx,ty,fh
+
+[DESIGN]
+max-args=10
+max-locals=30
+max-statements=80
+
+[MESSAGES CONTROL]
+disable=import-outside-toplevel

@@ -1,0 +1,258 @@
+{
+  "seed": 2026,
+  "image_size": 128,
+  "workers": 2,
+  "paths": {
+    "original": "data/original",
+    "prepared": "data/prepared",
+    "degraded": "data/degraded",
+    "results": "results"
+  },
+  "degradations": {
+    "gauss_15": {
+      "type": "gaussian",
+      "sigma": 15
+    },
+    "gauss_30": {
+      "type": "gaussian",
+      "sigma": 30
+    },
+    "sp_5": {
+      "type": "salt_pepper",
+      "prob": 0.05
+    },
+    "sp_20": {
+      "type": "salt_pepper",
+      "prob": 0.2
+    },
+    "mixed": {
+      "type": "mixed",
+      "sigma": 15,
+      "prob": 0.05
+    },
+    "lowcontrast": {
+      "type": "low_contrast",
+      "alpha": 0.5,
+      "beta": 40,
+      "sigma": 10
+    }
+  },
+  "metrics": {
+    "ssim_window": 8,
+    "ssim_step": 4
+  },
+  "stages": {
+    "bilateral": {
+      "radius": 3,
+      "sigma_space": 1.5,
+      "sigma_range": 60
+    },
+    "clahe": {
+      "tiles": 8,
+      "clip_limit": 2.0,
+      "range_threshold": 120
+    },
+    "unsharp": {
+      "amount": 0.4,
+      "sigma": 1.5,
+      "threshold": 0.0,
+      "noise_factor": 3.0
+    },
+    "inpaint": {
+      "max_window": 7
+    },
+    "wiener": {
+      "strength": 0.5,
+      "pad": 16
+    },
+    "diffusion": {
+      "iterations": 3,
+      "kappa": 10.0,
+      "gamma": 0.2
+    },
+    "stretch": {
+      "low_percentile": 0.0,
+      "high_percentile": 100.0,
+      "range_threshold": 150
+    }
+  },
+  "pipelines": {
+    "pipeline1": [
+      "bilateral",
+      "clahe",
+      "unsharp"
+    ],
+    "pipeline2": [
+      "inpaint",
+      "wiener",
+      "diffusion",
+      "stretch"
+    ]
+  },
+  "tuning": {
+    "step": 20,
+    "sweeps": {
+      "pipeline1": [
+        {
+          "stage": "bilateral",
+          "param": "sigma_range",
+          "values": [
+            25,
+            40,
+            60,
+            90
+          ]
+        },
+        {
+          "stage": "bilateral",
+          "param": "sigma_space",
+          "values": [
+            1.0,
+            1.5,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "stage": "clahe",
+          "param": "clip_limit",
+          "values": [
+            1.5,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "stage": "unsharp",
+          "param": "amount",
+          "values": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        }
+      ],
+      "pipeline2": [
+        {
+          "stage": "wiener",
+          "param": "strength",
+          "values": [
+            0.1,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "stage": "diffusion",
+          "param": "iterations",
+          "values": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "stage": "diffusion",
+          "param": "kappa",
+          "values": [
+            5,
+            10,
+            20
+          ]
+        },
+        {
+          "stage": "stretch",
+          "param": "range_threshold",
+          "values": [
+            130,
+            150,
+            180
+          ]
+        }
+      ]
+    },
+    "conditions": {
+      "pipeline1": [
+        "gauss_15",
+        "gauss_30",
+        "lowcontrast"
+      ],
+      "pipeline2": [
+        "gauss_15",
+        "gauss_30",
+        "sp_5",
+        "sp_20",
+        "mixed",
+        "lowcontrast"
+      ]
+    }
+  },
+  "save_intermediate_for": [
+    "my_photo"
+  ],
+  "scenarios": [
+    {
+      "id": 1,
+      "kind": "gain",
+      "pipeline": "pipeline1",
+      "degradation": "gauss_15",
+      "min_gain": 1.0,
+      "min_share": 0.9
+    },
+    {
+      "id": 2,
+      "kind": "gain",
+      "pipeline": "pipeline1",
+      "degradation": "gauss_30",
+      "min_gain": 3.0,
+      "min_share": 0.9
+    },
+    {
+      "id": 3,
+      "kind": "gain",
+      "pipeline": "pipeline2",
+      "degradation": "gauss_30",
+      "min_gain": 1.0,
+      "min_share": 0.9
+    },
+    {
+      "id": 4,
+      "kind": "gain",
+      "pipeline": "pipeline2",
+      "degradation": "sp_5",
+      "min_gain": 5.0,
+      "min_share": 0.9
+    },
+    {
+      "id": 5,
+      "kind": "gain",
+      "pipeline": "pipeline2",
+      "degradation": "sp_20",
+      "min_gain": 5.0,
+      "min_share": 0.9
+    },
+    {
+      "id": 6,
+      "kind": "gain",
+      "pipeline": "pipeline2",
+      "degradation": "mixed",
+      "min_gain": 3.0,
+      "min_share": 0.9
+    },
+    {
+      "id": 7,
+      "kind": "gain",
+      "pipeline": "pipeline2",
+      "degradation": "lowcontrast",
+      "min_gain": 2.0,
+      "min_share": 0.8
+    },
+    {
+      "id": 8,
+      "kind": "mean_ssim_gain",
+      "pipeline": "pipeline2",
+      "degradation": "sp_5",
+      "min_gain": 0.05
+    }
+  ]
+}
