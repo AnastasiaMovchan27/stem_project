@@ -1,0 +1,9 @@
+id,pipeline,degradation,kind,value,threshold,ok
+1,pipeline1,gauss_15,gain,0.811965811965812,0.9,False
+2,pipeline1,gauss_30,gain,0.9658119658119658,0.9,True
+3,pipeline2,gauss_30,gain,0.9487179487179487,0.9,True
+4,pipeline2,sp_5,gain,0.9316239316239316,0.9,True
+5,pipeline2,sp_20,gain,0.9658119658119658,0.9,True
+6,pipeline2,mixed,gain,0.9401709401709402,0.9,True
+7,pipeline2,lowcontrast,gain,0.8376068376068376,0.8,True
+8,pipeline2,sp_5,mean_ssim_gain,0.4458199659115476,0.05,True

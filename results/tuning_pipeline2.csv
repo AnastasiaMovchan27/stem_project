@@ -1,0 +1,13 @@
+pipeline,stage,param,value,mean_psnr
+pipeline2,wiener,strength,0.1,26.43704213545979
+pipeline2,wiener,strength,0.25,26.764693901296578
+pipeline2,wiener,strength,0.5,27.038208562899047
+pipeline2,diffusion,iterations,1,26.764693901296578
+pipeline2,diffusion,iterations,2,26.933264608740448
+pipeline2,diffusion,iterations,3,27.04498827369495
+pipeline2,diffusion,kappa,5,26.57527175989828
+pipeline2,diffusion,kappa,10,26.764693901296578
+pipeline2,diffusion,kappa,20,27.085958205703616
+pipeline2,stretch,range_threshold,130,26.577217961196304
+pipeline2,stretch,range_threshold,150,26.764693901296578
+pipeline2,stretch,range_threshold,180,26.764693901296578

@@ -1,0 +1,15 @@
+pipeline,stage,param,value,mean_psnr
+pipeline1,bilateral,sigma_range,25,22.537365855193155
+pipeline1,bilateral,sigma_range,40,23.586187245086677
+pipeline1,bilateral,sigma_range,60,23.992915998537175
+pipeline1,bilateral,sigma_range,90,23.536257670379978
+pipeline1,bilateral,sigma_space,1.0,23.89765598706777
+pipeline1,bilateral,sigma_space,1.5,23.992915998537175
+pipeline1,bilateral,sigma_space,2.0,23.711256622470994
+pipeline1,bilateral,sigma_space,3.0,23.374723453316083
+pipeline1,clahe,clip_limit,1.5,23.91623843113365
+pipeline1,clahe,clip_limit,2.0,23.992915998537175
+pipeline1,clahe,clip_limit,3.0,23.865554361039234
+pipeline1,unsharp,amount,0.2,23.91478228296952
+pipeline1,unsharp,amount,0.4,23.992915998537175
+pipeline1,unsharp,amount,0.6,23.874830908878145
